@@ -24,10 +24,6 @@ from recipes.models import Ingredient, Tag, Recipe, ShoppingCart, \
 User = get_user_model()
 
 
-class ListRetrieveViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin):
-    permission_classes = (IsAdminOrReadOnly,)
-
-
 class TagViewSet(ReadOnlyModelViewSet):
     """Вьюсет список тегов."""
     queryset = Tag.objects.all()
