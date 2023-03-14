@@ -38,7 +38,6 @@ class CustomUserSerializer(UserSerializer):
         if user.is_anonymous:
             return False
         return Follow.objects.filter(user=user, author=obj).exists()
-        # return user.follower.filter(author=obj.id).exists()
 
 
 class FollowSerializer(CustomUserSerializer):
@@ -74,9 +73,13 @@ class FollowSerializer(CustomUserSerializer):
         request = self.context.get('request')
         limit = request.GET.get('recipes_limit')
         recipes = obj.recipes.all()
-        if limit == '':
+        if limit == '' or not (limit.isdigit()):
             raise ValidationError({
-                'recipes_limit': 'должно быть только целым числом!'
+                'recipes_limit': 'Лимит должен быть только целым числом!'
+            })
+        if int(limit) <= 0:
+            raise ValidationError({
+                'recipes_limit': 'Лимит должен быть положительным числом!'
             })
         recipes = recipes[:int(limit)]
         serializer = RecipeAddingSerializer(recipes, many=True, read_only=True)
@@ -185,16 +188,17 @@ class RecipeWriteSerializer(ModelSerializer):
             })
         ingredients_list = []
         for item in ingredients:
-            ingredient = get_object_or_404(Ingredient, id=item['id'])
-            if ingredient in ingredients_list:
-                raise ValidationError({
-                    'ingredients': 'Ингредиент не должен повторяться.'
-                })
             if int(item.get('amount')) < 1:
                 raise ValidationError({
                     'amount': 'Минимальное количество = 1'
                 })
-            ingredients_list.append(ingredient)
+            ingredients_list.append(item['id'])
+        unique_ingredients = set(ingredients_list)
+        if len(ingredients_list) > len(unique_ingredients):
+            raise ValidationError({
+                'ingredients': 'Ингредиент не должен повторяться.'
+            })
+
         return value
 
     def validate_cooking_time(self, time):

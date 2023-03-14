@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 
 User = get_user_model()
@@ -8,7 +8,16 @@ User = get_user_model()
 class Tag(models.Model):
     """Модель списка тегов."""
     name = models.CharField('Название тега', max_length=100, unique=True,)
-    color = models.CharField('Цвет', max_length=7, unique=True,)
+    color = models.CharField('Цвет',
+                             max_length=7,
+                             unique=True,
+                             validators=[
+                                 RegexValidator(
+                                     regex='^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$',
+                                     message='Не является цветом в формате HEX!'
+                                 )
+                             ]
+                             )
     slug = models.SlugField('Уникальный слаг', max_length=50, unique=True)
 
     class Meta:
@@ -23,12 +32,20 @@ class Tag(models.Model):
 class Ingredient(models.Model):
     """Модель ингредиентов."""
     name = models.CharField('Название ингредиента', max_length=200)
-    measurement_unit = models.CharField('Единица измерения', max_length=50)
+    measurement_unit = models.CharField('Единица измерения', max_length=10)
 
     class Meta:
         verbose_name = 'Ингредиент'
         verbose_name_plural = 'Ингредиенты'
         ordering = ('name',)
+        # При миграции выдаёт ошибку, так как ингредиент уникален исходя из
+        # constraints промежуточной модели  class IngredientInRecipe
+        # constraints = [
+        #     models.UniqueConstraint(
+        #         fields=['name'],
+        #         name='unique_name_ingredient',
+        #     )
+        # ]
 
     def __str__(self):
         return f'{self.name}, {self.measurement_unit}'

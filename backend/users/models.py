@@ -4,6 +4,18 @@ from django.db import models
 
 class User(AbstractUser):
     """Собственная модель Пользователя."""
+    email = models.EmailField(
+        'email',
+        max_length=200,
+        unique=True,
+
+    )
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = [
+        'username',
+        'first_name',
+        'last_name',
+    ]
 
     class Meta:
         ordering = ['id']
