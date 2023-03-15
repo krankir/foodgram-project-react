@@ -7,7 +7,7 @@ User = get_user_model()
 
 class Tag(models.Model):
     """Модель списка тегов."""
-    name = models.CharField('Название тега', max_length=100, unique=True,)
+    name = models.CharField('Название тега', max_length=100, unique=True, )
     color = models.CharField('Цвет',
                              max_length=7,
                              unique=True,
@@ -38,14 +38,6 @@ class Ingredient(models.Model):
         verbose_name = 'Ингредиент'
         verbose_name_plural = 'Ингредиенты'
         ordering = ('name',)
-        # При миграции выдаёт ошибку, так как ингредиент уникален исходя из
-        # constraints промежуточной модели  class IngredientInRecipe
-        # constraints = [
-        #     models.UniqueConstraint(
-        #         fields=['name'],
-        #         name='unique_name_ingredient',
-        #     )
-        # ]
 
     def __str__(self):
         return f'{self.name}, {self.measurement_unit}'
@@ -69,7 +61,7 @@ class Recipe(models.Model):
     image = models.ImageField('Изображение', blank=True, null=True,
                               upload_to='image_recipes/',
                               )
-    text = models.TextField('Описание',)
+    text = models.TextField('Описание', )
     cooking_time = models.PositiveSmallIntegerField(
         'Время приготовления',
         validators=[MinValueValidator(1,
