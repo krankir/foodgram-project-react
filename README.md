@@ -7,6 +7,7 @@
 Проект доступен по [адресу](http://foodgram-project.ddns.net/) foodgram-project.ddns.net
 
 Документация к API доступна [здесь](http://foodgram-project.ddns.net/api/docs/)
+Тестовая учётка Администратора email: root@yandex.ru password: 11qqaazz
 
 В документации описаны возможные запросы к API и структура ожидаемых ответов. Для каждого запроса указаны уровни прав доступа.
 
