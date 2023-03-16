@@ -1,6 +1,6 @@
 ## Проект Foodgram
 
-![Foodgram project workflow Status](https://github.com/krankir/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg?branch=master&event=push)
+![workflow](https://github.com/krankir/foodgram-project-react/actions/workflows/main.yml/badge.svg)
 
 «Продуктовый помощник»: приложение, на котором пользователи публикуют рецепты, подписываться на публикации других авторов и добавлять рецепты в избранное. Сервис «Список покупок» позволит пользователю создавать список продуктов, которые нужно купить для приготовления выбранных блюд.
 
