@@ -18,7 +18,7 @@ SECRET_KEY = os.getenv(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', default='True')
 
-ALLOWED_HOSTS = ['45.131.41.34', '127.0.0.1', 'localhost', 'backend:8000', 'backend', 'foodgram-project.ddns.net']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
