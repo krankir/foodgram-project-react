@@ -1,12 +1,12 @@
 ## Проект Foodgram
 
-![example workflow](https://github.com/krankir/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
+![Foodgram project workflow Status](https://github.com/krankir/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg?branch=master&event=push)
 
 «Продуктовый помощник»: приложение, на котором пользователи публикуют рецепты, подписываться на публикации других авторов и добавлять рецепты в избранное. Сервис «Список покупок» позволит пользователю создавать список продуктов, которые нужно купить для приготовления выбранных блюд.
 
 Проект доступен по [адресу](http://foodgram-project.ddns.net/) foodgram-project.ddns.net
 
-Документация к API доступна [здесь](http://45.131.41.34/api/docs/)
+Документация к API доступна [здесь](http://foodgram-project.ddns.net/api/docs/)
 
 В документации описаны возможные запросы к API и структура ожидаемых ответов. Для каждого запроса указаны уровни прав доступа.
 
